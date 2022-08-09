@@ -5,6 +5,10 @@ import { SSRProvider } from '@react-aria/ssr'
 import { ErrorBoundary } from 'react-error-boundary'
 import { LazyMotion } from 'framer-motion'
 import { SessionProvider } from 'next-auth/react'
+import {
+	initializeUTMParamsCapture,
+	addCloudLinkHandler,
+} from '@hashicorp/platform-analytics'
 import '@hashicorp/platform-util/nprogress/style.css'
 import useAnchorLinkAnalytics from '@hashicorp/platform-util/anchor-link-analytics'
 import CodeTabsProvider from '@hashicorp/react-code-block/provider'
@@ -42,6 +46,8 @@ export default function App({
 	layoutProps,
 	host,
 }) {
+	initializeUTMParamsCapture()
+	addCloudLinkHandler()
 	useAnchorLinkAnalytics()
 	useEffect(() => makeDevAnalyticsLogger(), [])
 
